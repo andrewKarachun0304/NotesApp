@@ -2,5 +2,6 @@
     <string name="app_name">NotesApp</string>
     <string name="notes">Notes</string>
     <string name="add_note">add Note</string>
-    <string name="create_new">create new</string>
+    <string name="create_new">create</string>
+    <string name="input_text_crt_note">Input text to create new note:</string>
 </resources>
