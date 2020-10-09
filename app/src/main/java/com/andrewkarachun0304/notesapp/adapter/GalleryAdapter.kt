@@ -11,10 +11,12 @@ import com.andrewkarachun0304.notesapp.R
 import com.andrewkarachun0304.notesapp.ReadWriteImage
 import kotlinx.android.synthetic.main.item_photo.view.*
 
-class GalleryAdapter(private var gallerySet: List<ImageData>) :
+class GalleryAdapter :
     RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
 
-    fun updateDataGallery(list: List<ImageData>) {
+    private var gallerySet =  ArrayList<ImageData>()
+
+    fun updateDataGallery(list: ArrayList<ImageData>) {
         gallerySet = list
         notifyDataSetChanged()
     }
