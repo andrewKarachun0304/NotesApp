@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.andrewkarachun0304.notesapp">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -9,10 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowImageActivity"></activity>
-        <activity android:name=".CreateNoteActivity" />
-        <activity android:name=".GaleryActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ShowImageActivity"
+            android:screenOrientation="portrait" ></activity>
+        <activity android:name=".CreateNoteActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".GaleryActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
