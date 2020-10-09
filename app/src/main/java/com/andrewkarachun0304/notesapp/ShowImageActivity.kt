@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_show_image.*
-import java.util.*
 
 private const val IMAGE_DATA_KEY = "image_data"
 
