@@ -4,4 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShowImageActivity"/>
+    tools:context=".ShowImageActivity">
+
+    <ImageView
+        android:id="@+id/full_image_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

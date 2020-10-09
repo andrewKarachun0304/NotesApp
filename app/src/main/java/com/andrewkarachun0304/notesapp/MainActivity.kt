@@ -10,10 +10,11 @@ import com.andrewkarachun0304.notesapp.dto.notesDataBase
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        notesDataBase.filingTheBase()
+
         val adapter = NotesAdapter(notesDataBase.notesDB)
 
         notesRecycler.adapter = adapter
@@ -24,5 +25,22 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,CreateNoteActivity::class.java)
             startActivity(intent)
         }
+
     }
+
+    override fun onResume() {
+        super.onResume()
+        val adapter = NotesAdapter(notesDataBase.notesDB)
+
+        notesRecycler.adapter = adapter
+        notesRecycler.layoutManager = LinearLayoutManager(this)
+        notesRecycler.hasFixedSize()
+
+        add_note_button.setOnClickListener{
+            val intent = Intent(this,CreateNoteActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
 }

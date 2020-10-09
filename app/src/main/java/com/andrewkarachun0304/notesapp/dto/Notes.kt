@@ -7,7 +7,7 @@ object notesDataBase{
     val notesDB = mutableListOf<Notes>()
 
     fun addNote(note: String){
-        notesDB.add(Notes(note = note))
+        notesDB.add(Notes(note))
     }
 
     fun filingTheBase(){
