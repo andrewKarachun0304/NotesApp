@@ -8,9 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowImageActivity"></activity>
-        <activity android:name=".CreateNoteActivity" />
+        <activity android:name=".ShowImageActivity"/>
+        <activity android:name=".CreateNoteActivity"/>
         <activity android:name=".GaleryActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
