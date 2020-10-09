@@ -2,8 +2,10 @@ package com.andrewkarachun0304.notesapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.andrewkarachun0304.notesapp.dto.notesDataBase
 import kotlinx.android.synthetic.main.activity_create_note.*
 
 const val KEY_PASS = "12345"
@@ -19,9 +21,15 @@ class CreateNoteActivity : AppCompatActivity() {
                 intent = Intent(this, GaleryActivity::class.java)
                 startActivity(intent)
             } else {
-                Toast.makeText(this, "ERROR 403! x0F28182001", Toast.LENGTH_SHORT).show()
+                val text = create_new_note_text_view.text.toString()
+                if(text.isNotEmpty()){
+                    notesDataBase.addNote(text)
+                    Toast.makeText(this,"note $text is added",Toast.LENGTH_SHORT).show()
+                }
+                if(text.isNullOrEmpty()){
+                    Toast.makeText(this,"note is empty... enter text",Toast.LENGTH_SHORT).show()
+                }
             }
         }
-
     }
 }
