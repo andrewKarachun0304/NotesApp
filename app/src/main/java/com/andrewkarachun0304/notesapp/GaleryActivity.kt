@@ -10,10 +10,20 @@ import kotlinx.android.synthetic.main.activity_galery.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val GALLERY_REQUEST_CODE = 101
+private const val IMAGE_DATA_KEY = "image_data"
 
 class GaleryActivity : AppCompatActivity() {
-    private val dataBase by lazy { AppDataBase.getInstance(this) }
-    private val galleryAdapter by lazy { GalleryAdapter() }
+    private val dataBase by lazy { AppDataBase.getInstance(applicationContext) }
+    private val galleryAdapter by lazy {
+        GalleryAdapter(object : GalleryAdapter.Listener {
+            override fun onClick(imageData: ImageData) {
+                intent = Intent(this@GaleryActivity, ShowImageActivity::class.java)
+                intent.putExtra(IMAGE_DATA_KEY, imageData)
+                startActivity(intent)
+            }
+
+        })
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +43,7 @@ class GaleryActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateList(){
+    private fun updateList() {
         galleryAdapter.updateDataGallery(dataBase.getAllImage())
     }
 
