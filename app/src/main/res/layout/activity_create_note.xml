@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         tools:text="create new"
-        tools:ignore="MissingConstraints"/>
-
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:layout_width="match_parent"
