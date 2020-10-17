@@ -4,4 +4,10 @@
     <string name="add_note">add Note</string>
     <string name="create_new">create</string>
     <string name="input_text_crt_note">Input text to create new note:</string>
+    <string name="input_body_notes_str">Input body notes</string>
+    <string name="input_title_notes_str">Input title notes</string>
+    <string name="delete_str">Delete</string>
+    <string name="save_str">save</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -3,6 +3,7 @@ package com.andrewkarachun0304.notesapp
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.andrewkarachun0304.notesapp.database.entity.ImageData
 import kotlinx.android.synthetic.main.activity_show_image.*
 
 private const val IMAGE_DATA_KEY = "image_data"

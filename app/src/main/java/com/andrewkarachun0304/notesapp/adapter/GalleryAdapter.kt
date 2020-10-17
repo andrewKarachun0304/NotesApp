@@ -6,18 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andrewkarachun0304.notesapp.Base64Converter
-import com.andrewkarachun0304.notesapp.ImageData
+import com.andrewkarachun0304.notesapp.database.entity.ImageData
 import com.andrewkarachun0304.notesapp.R
 import com.andrewkarachun0304.notesapp.ReadWriteImage
+import com.andrewkarachun0304.notesapp.utils.launchIO
+import com.andrewkarachun0304.notesapp.utils.launchUI
 import kotlinx.android.synthetic.main.item_photo.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class GalleryAdapter(val listener: Listener) :
     RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
 
     private var gallerySet = ArrayList<ImageData>()
 
-    fun updateDataGallery(list: ArrayList<ImageData>) {
-        gallerySet = list
+    fun updateDataGallery(list: List<ImageData>?) {
+        gallerySet = list as ArrayList<ImageData>
         notifyDataSetChanged()
     }
 
@@ -36,7 +41,11 @@ class GalleryAdapter(val listener: Listener) :
 
     inner class GalleryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(imageData: ImageData) {
-            itemView.item_photo_image_view.setImageBitmap(getImage(imageData.path))
+            launchUI {
+                itemView.item_photo_image_view.setImageBitmap(withContext(Dispatchers.IO) {
+                    getImage(imageData.path)
+                })
+            }
             itemView.setOnClickListener {
                 listener.onClick(imageData)
             }

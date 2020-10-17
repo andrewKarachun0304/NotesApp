@@ -1,20 +1,19 @@
 package com.andrewkarachun0304.notesapp
 
 import android.content.Context
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.io.*
 
 object ReadWriteImage {
     fun readFromFile(context: Context, fileName: String): String {
-        val fis: FileInputStream = context.openFileInput(fileName)
-        val text = fis.readBytes().toString(Charsets.UTF_8)
-        fis.close()
+        val br = BufferedReader(InputStreamReader(context.openFileInput(fileName)))
+        val text = br.readText()
+        br.close()
         return text
     }
 
-    fun writeToFile(context: Context, image: String, path: String){
-        val fos: FileOutputStream = context.openFileOutput(path, Context.MODE_PRIVATE)
-        fos.write(image.toByteArray())
-        fos.close()
+    fun writeToFile(context: Context, image: String, path: String) {
+        val bw = BufferedWriter(OutputStreamWriter(context.openFileOutput(path, Context.MODE_PRIVATE)))
+        bw.write(image)
+        bw.close()
     }
 }

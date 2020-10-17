@@ -6,18 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.andrewkarachun0304.notesapp.adapter.GalleryAdapter
+import com.andrewkarachun0304.notesapp.database.AppDataBase
+import com.andrewkarachun0304.notesapp.database.entity.ImageData
+import com.andrewkarachun0304.notesapp.utils.launchIO
+import com.andrewkarachun0304.notesapp.utils.launchUI
 import kotlinx.android.synthetic.main.activity_galery.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 const val GALLERY_REQUEST_CODE = 101
 private const val IMAGE_DATA_KEY = "image_data"
 
-class GaleryActivity : AppCompatActivity() {
-    private val dataBase by lazy { AppDataBase.getInstance(applicationContext) }
+class GalleryActivity : AppCompatActivity() {
+    private val imageDao by lazy { AppDataBase.getInstance(applicationContext)?.getImageDao() }
     private val galleryAdapter by lazy {
         GalleryAdapter(object : GalleryAdapter.Listener {
             override fun onClick(imageData: ImageData) {
-                intent = Intent(this@GaleryActivity, ShowImageActivity::class.java)
+                intent = Intent(this@GalleryActivity, ShowImageActivity::class.java)
                 intent.putExtra(IMAGE_DATA_KEY, imageData)
                 startActivity(intent)
             }
@@ -31,7 +34,7 @@ class GaleryActivity : AppCompatActivity() {
 
         recycler_view.apply {
             adapter = galleryAdapter
-            layoutManager = GridLayoutManager(this@GaleryActivity, 2)
+            layoutManager = GridLayoutManager(this@GalleryActivity, 2)
         }
         updateList()
 
@@ -44,19 +47,26 @@ class GaleryActivity : AppCompatActivity() {
     }
 
     private fun updateList() {
-        galleryAdapter.updateDataGallery(dataBase.getAllImage())
+        launchIO {
+            launchUI {
+                galleryAdapter.updateDataGallery(imageDao?.getAllImage())
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, imageData: Intent?) {
         super.onActivityResult(requestCode, resultCode, imageData)
 
-        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
-            val selectedImage = imageData?.data
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && imageData?.data != null) {
+            val selectedImage = imageData.data
             if (selectedImage != null) {
-                val fileName = selectedImage.getImageName()
+                val fileName = selectedImage.getImageName().replace('/', '_')
+
                 val imageStr = Base64Converter.imageToBase64(contentResolver, selectedImage)
                 ReadWriteImage.writeToFile(this, imageStr, fileName)
-                dataBase.addImageToDataBase(ImageData(0, "title", fileName))
+                launchIO {
+                    imageDao?.addImage(ImageData( title = "title", path = fileName))
+                }
                 updateList()
             }
         }
@@ -67,4 +77,5 @@ class GaleryActivity : AppCompatActivity() {
         .substringAfterLast("%2")
         .substringBeforeLast('.')
         .trim()
+
 }

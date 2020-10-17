@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".CreateNoteActivity">
+    tools:context=".UpdateNoteActivity"
+    android:padding="16dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/title_new_note_tf"
+        android:id="@+id/title_update_note_tf"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteX="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/title_new_note_et"
+            android:id="@+id/title_update_note_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true" />
@@ -25,16 +25,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/body_new_note_tf"
+        android:id="@+id/body_update_note_tf"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="16dp"
         android:hint="@string/input_body_notes_str"
-        app:layout_constraintTop_toBottomOf="@+id/title_new_note_tf">
+        app:layout_constraintTop_toBottomOf="@+id/title_update_note_tf">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/body_new_note_et"
+            android:id="@+id/body_update_note_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:singleLine="true" />
@@ -42,13 +42,21 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/create_new_note_button"
+        android:id="@+id/update_note_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_new"
+        android:text="@string/save_str"
         android:textSize="20sp"
-        app:icon="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/delete_note_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_str"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
